@@ -1,19 +1,31 @@
 //
-//  ContentViewController.swift
+//  StoryViewController.swift
 //  bookShop
 //
-//  Created by BruceLee on 2017/11/30.
+//  Created by BruceLee on 2017/12/1.
 //  Copyright © 2017年 BruceLee. All rights reserved.
 //
 
 import UIKit
 
-class ContentViewController: UIViewController {
-    var name: String?
-    @IBOutlet var nameLabel: UILabel!
+class StoryViewController: UIViewController {
+    var book: Book?
+    
+    @IBOutlet var bookImg: UIImageView!
+    @IBOutlet var bookStory: UILabel!
+    
+//    func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        <#code#>
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = name
+    
+        if let book = book {
+            navigationItem.title = "\(book.name)"
+            bookImg.image = UIImage(named:"\(book.imgName)")
+            bookStory.text = book.story
+        }
+        print(book)
         // Do any additional setup after loading the view.
     }
 

@@ -1,5 +1,5 @@
 //
-//  DetailTableViewController.swift
+//  EditTableViewController.swift
 //  bookShop
 //
 //  Created by BruceLee on 2017/11/30.
@@ -8,16 +8,20 @@
 
 import UIKit
 
-class DetailTableViewController: UITableViewController {
+class EditTableViewController: UITableViewController {
+    var book: Book?
 
+    @IBOutlet var bookImg: UIImageView!
+    @IBOutlet var bookName: UITextField!
+    @IBOutlet var bookAuthor: UITextField!
     override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        if let book = book {
+            bookImg.image = UIImage(named:book.imgName)
+            bookName.text = book.name
+            bookAuthor.text = book.author
+        }
+        print(book)
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,15 +31,15 @@ class DetailTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 0
+//    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 0
+//    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,14 +86,14 @@ class DetailTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        book?.name = bookName.text ?? ""
+        book?.author = bookAuthor.text ?? ""
     }
-    */
+ 
 
 }
