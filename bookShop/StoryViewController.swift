@@ -24,8 +24,9 @@ class StoryViewController: UIViewController {
             navigationItem.title = "\(book.name)"
             bookImg.image = UIImage(named:"\(book.imgName)")
             bookStory.text = book.story
+            print(book)
         }
-        print(book)
+        
         // Do any additional setup after loading the view.
     }
 

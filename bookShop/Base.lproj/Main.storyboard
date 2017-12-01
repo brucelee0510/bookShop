@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Book List-->
+        <!--列表頁-->
         <scene sceneID="SL6-Yh-BIY">
             <objects>
-                <tableViewController id="N7h-Gw-bKv" customClass="ListTableViewController" customModule="bookShop" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="N7h-Gw-bKv" userLabel="列表頁" customClass="ListTableViewController" customModule="bookShop" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fb8-3S-m5q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,13 +50,13 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="edit"/>
                                                     <connections>
-                                                        <action selector="editClicked:" destination="N7h-Gw-bKv" eventType="touchUpInside" id="rfr-2o-Eh0"/>
+                                                        <action selector="editClicked:" destination="N7h-Gw-bKv" eventType="touchUpInside" id="RiG-rh-E3L"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="EQn-Fd-su5" kind="show" id="91L-F1-jtb"/>
+                                            <segue destination="f3V-Sw-nXy" kind="show" id="DqR-b3-3kZ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="Uvn-2E-xfD">
@@ -89,13 +89,13 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="edit"/>
                                                     <connections>
-                                                        <action selector="editClicked:" destination="N7h-Gw-bKv" eventType="touchUpInside" id="nsf-aU-OYI"/>
+                                                        <action selector="editClicked:" destination="N7h-Gw-bKv" eventType="touchUpInside" id="lJ3-C1-hVY"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="EQn-Fd-su5" kind="show" id="Zdl-8x-MRm"/>
+                                            <segue destination="f3V-Sw-nXy" kind="show" id="Qq3-C1-WUq"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -114,17 +114,17 @@
                         <outletCollection property="BookCoverImages" destination="Avr-cS-Zxw" collectionClass="NSMutableArray" id="iaj-XY-UJ3"/>
                         <outletCollection property="BookAuthorLabels" destination="CsO-WW-B7Y" collectionClass="NSMutableArray" id="f9p-Cm-EjV"/>
                         <outletCollection property="BookAuthorLabels" destination="Op5-X6-zCt" collectionClass="NSMutableArray" id="jcq-g4-hRQ"/>
-                        <segue destination="f3V-Sw-nXy" kind="show" identifier="bookStory" id="pbZ-wT-jaA"/>
+                        <segue destination="EQn-Fd-su5" kind="show" identifier="bookStory" id="lW9-mF-Zua"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ljj-dU-CcA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1186.4000000000001" y="64.31784107946028"/>
         </scene>
-        <!--Edit-->
+        <!--編輯頁-->
         <scene sceneID="QiU-eo-5l9">
             <objects>
-                <tableViewController id="EQn-Fd-su5" customClass="EditTableViewController" customModule="bookShop" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="EQn-Fd-su5" userLabel="編輯頁" customClass="EditTableViewController" customModule="bookShop" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pCF-tS-a7i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -204,7 +204,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Edit" id="7bI-o9-zKZ">
                         <barButtonItem key="backBarButtonItem" title="cancel" id="zk8-dB-v3b"/>
-                        <barButtonItem key="rightBarButtonItem" title="done" id="1wr-i9-egT">
+                        <barButtonItem key="rightBarButtonItem" title="save" id="1wr-i9-egT">
                             <connections>
                                 <action selector="unwindToList:" destination="7EG-tm-Us4" id="Tzn-Ms-toG"/>
                                 <segue destination="7EG-tm-Us4" kind="unwind" unwindAction="unwindToListWithSegue:" id="nrI-CN-eni"/>
@@ -222,10 +222,10 @@
             </objects>
             <point key="canvasLocation" x="2020" y="-63.418290854572717"/>
         </scene>
-        <!--Title-->
+        <!--內容頁-->
         <scene sceneID="MjA-QJ-qGG">
             <objects>
-                <viewController id="f3V-Sw-nXy" customClass="StoryViewController" customModule="bookShop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="f3V-Sw-nXy" userLabel="內容頁" customClass="StoryViewController" customModule="bookShop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F7D-O9-LRQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -275,6 +275,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="91L-F1-jtb"/>
+        <segue reference="DqR-b3-3kZ"/>
     </inferredMetricsTieBreakers>
 </document>

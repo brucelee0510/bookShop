@@ -73,73 +73,17 @@ class ListTableViewController: UITableViewController {
 //        return 0
 //    }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == PropertyKeys.storySegue {
             if let button = sender as? UIButton{
-                let StoryViewController = segue.destination as? StoryViewController
-                StoryViewController?.book = books[button.tag]
-            }else if let row = tableView.indexPathForSelectedRow?.row{
                 let editTableViewController = segue.destination as? EditTableViewController
-                editTableViewController?.book = books[row]
+                editTableViewController?.book = books[button.tag]
+                print(editTableViewController?.book)
             }
+        }else if let row = tableView.indexPathForSelectedRow?.row{
+            let storyViewController = segue.destination as? StoryViewController
+            storyViewController?.book = books[row]
         }
-        
-        
-//        let editTableViewController = segue.destination as? EditTableViewController
-//        if let row = tableView.indexPathForSelectedRow?.row{
-//            editTableViewController?.book = books[row]
-//        }
-//        if let indexPath = tableView.indexPathForSelectedRow{
-//            editTableViewController?.book = books[indexPath.row]
-//        }
     }
- 
-
 }
