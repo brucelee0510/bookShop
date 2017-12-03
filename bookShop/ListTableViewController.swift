@@ -11,6 +11,7 @@ import UIKit
 struct NotificationObjectKey{
     static let bookName = "bookName"
     static let bookAuthor = "bookAuthor"
+    static let tag = 3
 }
 extension Notification.Name{
     static let bookEdited = Notification.Name("bookEdited")
@@ -31,9 +32,8 @@ class ListTableViewController: UITableViewController{
     }
     
     //notification觸發時執行此func
-    @objc func updateBookNoti(noti: Notification,segue: UIStoryboardSegue){
-        let source = segue.source as? EditTableViewController
-        if let row = source?.tag, let userInfo = noti.userInfo, let bookName = userInfo[NotificationObjectKey.bookName] as? String, let bookAuthor = userInfo[NotificationObjectKey.bookAuthor] as? String{
+    @objc func updateBookNoti(noti: Notification){
+        if let userInfo = noti.userInfo, let row = userInfo[NotificationObjectKey.tag] as? Int, let bookName = userInfo[NotificationObjectKey.bookName] as? String, let bookAuthor = userInfo[NotificationObjectKey.bookAuthor] as? String{
             var book = books[row]
             book.name = bookName
             book.author = bookAuthor
@@ -44,14 +44,14 @@ class ListTableViewController: UITableViewController{
         }
     }
     
-    @IBAction func unwindToList(segue: UIStoryboardSegue) {
-        let source = segue.source as? EditTableViewController
-        if let book = source?.book, let row = source?.tag{
-            books[row] = book
-            BookNameLabels[row].text = book.name
-            BookAuthorLabels[row].text = book.author
-        }
-    }
+//    @IBAction func unwindToList(segue: UIStoryboardSegue) {
+//        let source = segue.source as? EditTableViewController
+//        if let book = source?.book, let row = source?.tag{
+//            books[row] = book
+//            BookNameLabels[row].text = book.name
+//            BookAuthorLabels[row].text = book.author
+//        }
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         books.append(Book(name:"人人都能學會製作厲害圖表", author:"Smart智富", imgName:"book1", story:"""
@@ -73,7 +73,8 @@ class ListTableViewController: UITableViewController{
 
         //建立observer
 //        let notificationName = Notification.Name("bookEdited")
-        NotificationCenter.default.addObserver(self, selector: #selector(updateBookNoti(noti), name: .bookEdited, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBookNoti(noti:)), name: .bookEdited, object: nil)
     }
 
     override func didReceiveMemoryWarning() {

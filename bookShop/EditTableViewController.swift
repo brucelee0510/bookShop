@@ -27,8 +27,9 @@ class EditTableViewController: UITableViewController,UITextFieldDelegate {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if let name = bookName.text, let author = bookAuthor.text{
-            NotificationCenter.default.post(name: .bookEdited, object: nil, userInfo: [NotificationObjectKey.name: name, NotificationObjectKey.author: author])
+        if let name = bookName.text, let author = bookAuthor.text, let tag = tag{
+            print("executed")
+            NotificationCenter.default.post(name: .bookEdited, object: nil, userInfo: [NotificationObjectKey.bookName: name, NotificationObjectKey.bookAuthor: author,NotificationObjectKey.tag: tag])
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
@@ -40,8 +41,8 @@ class EditTableViewController: UITableViewController,UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        book?.name = bookName.text ?? ""
-        book?.author = bookAuthor.text ?? ""
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        book?.name = bookName.text ?? ""
+//        book?.author = bookAuthor.text ?? ""
+//    }
 }

@@ -221,11 +221,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Edit" id="7bI-o9-zKZ">
                         <barButtonItem key="backBarButtonItem" title="cancel" id="zk8-dB-v3b"/>
-                        <barButtonItem key="rightBarButtonItem" title="save" id="1wr-i9-egT">
-                            <connections>
-                                <segue destination="7EG-tm-Us4" kind="unwind" unwindAction="unwindToListWithSegue:" id="uVd-Gu-pYY"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="save" id="1wr-i9-egT"/>
                     </navigationItem>
                     <connections>
                         <outlet property="bookAuthor" destination="L0e-9Q-KrL" id="Qpv-fH-yc3"/>
@@ -234,7 +230,6 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wd-CN-IZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="7EG-tm-Us4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2020" y="-63.418290854572717"/>
         </scene>
