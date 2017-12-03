@@ -8,9 +8,10 @@
 
 import UIKit
 
-class EditTableViewController: UITableViewController {
+class EditTableViewController: UITableViewController,UITextFieldDelegate {
     
     var book: Book?
+    var tag: Int?
 
     @IBOutlet var bookImg: UIImageView!
     @IBOutlet var bookName: UITextField!
@@ -23,9 +24,17 @@ class EditTableViewController: UITableViewController {
             bookName.text = book.name
             bookAuthor.text = book.author
         }
-        print(book)
     }
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let name = bookName.text, let author = bookAuthor.text{
+            NotificationCenter.default.post(name: .bookEdited, object: nil, userInfo: [NotificationObjectKey.name: name, NotificationObjectKey.author: author])
+        }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -8,23 +8,45 @@
 
 import UIKit
 
-class ListTableViewController: UITableViewController {
+struct NotificationObjectKey{
+    static let bookName = "bookName"
+    static let bookAuthor = "bookAuthor"
+}
+extension Notification.Name{
+    static let bookEdited = Notification.Name("bookEdited")
+}
+
+class ListTableViewController: UITableViewController{
     var books = [Book]()
     @IBOutlet var BookNameLabels: [UILabel]!
     @IBOutlet var BookCoverImages: [UIImageView]!
     @IBOutlet var BookAuthorLabels: [UILabel]!
 
-   
+
     struct PropertyKeys{
         static let storySegue = "bookStory"
     }
     @IBAction func editClicked(_ sender: Any) {
-        performSegue(withIdentifier: PropertyKeys.storySegue, sender: nil)
+        performSegue(withIdentifier: PropertyKeys.storySegue, sender: sender)
+    }
+    
+    //notification觸發時執行此func
+    @objc func updateBookNoti(noti: Notification,segue: UIStoryboardSegue){
+        let source = segue.source as? EditTableViewController
+        if let row = source?.tag, let userInfo = noti.userInfo, let bookName = userInfo[NotificationObjectKey.bookName] as? String, let bookAuthor = userInfo[NotificationObjectKey.bookAuthor] as? String{
+            var book = books[row]
+            book.name = bookName
+            book.author = bookAuthor
+            books[row] = book
+            BookNameLabels[row].text = bookName
+            BookAuthorLabels[row].text = bookAuthor
+            
+        }
     }
     
     @IBAction func unwindToList(segue: UIStoryboardSegue) {
         let source = segue.source as? EditTableViewController
-        if let book = source?.book, let row = tableView.indexPathForSelectedRow?.row{
+        if let book = source?.book, let row = source?.tag{
             books[row] = book
             BookNameLabels[row].text = book.name
             BookAuthorLabels[row].text = book.author
@@ -49,11 +71,9 @@ class ListTableViewController: UITableViewController {
             BookCoverImages[i].image = UIImage(named: books[i].imgName)
         }
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        //建立observer
+//        let notificationName = Notification.Name("bookEdited")
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBookNoti(noti), name: .bookEdited, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,25 +81,13 @@ class ListTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == PropertyKeys.storySegue {
             if let button = sender as? UIButton{
                 let editTableViewController = segue.destination as? EditTableViewController
                 editTableViewController?.book = books[button.tag]
-                print(editTableViewController?.book)
+                editTableViewController?.tag = button.tag
+                
             }
         }else if let row = tableView.indexPathForSelectedRow?.row{
             let storyViewController = segue.destination as? StoryViewController

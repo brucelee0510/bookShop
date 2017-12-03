@@ -62,13 +62,13 @@
 		059A55BA1FCFE3E9002C3FE6 /* bookShop */ = {
 			isa = PBXGroup;
 			children = (
-				059A55DA1FD002BD002C3FE6 /* EditTableViewController.swift */,
-				059A55BB1FCFE3E9002C3FE6 /* AppDelegate.swift */,
 				059A55BF1FCFE3E9002C3FE6 /* Main.storyboard */,
-				059A55DC1FD1409B002C3FE6 /* StoryViewController.swift */,
-				059A55D81FCFF84D002C3FE6 /* book.swift */,
 				059A55D01FCFE44D002C3FE6 /* ListTableViewController.swift */,
+				059A55DC1FD1409B002C3FE6 /* StoryViewController.swift */,
+				059A55DA1FD002BD002C3FE6 /* EditTableViewController.swift */,
+				059A55D81FCFF84D002C3FE6 /* book.swift */,
 				059A55C51FCFE3E9002C3FE6 /* Assets.xcassets */,
+				059A55BB1FCFE3E9002C3FE6 /* AppDelegate.swift */,
 				059A55C71FCFE3E9002C3FE6 /* LaunchScreen.storyboard */,
 				059A55CA1FCFE3E9002C3FE6 /* Info.plist */,
 				059A55C21FCFE3E9002C3FE6 /* bookShop.xcdatamodeld */,

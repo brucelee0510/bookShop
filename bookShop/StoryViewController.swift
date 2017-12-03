@@ -14,9 +14,6 @@ class StoryViewController: UIViewController {
     @IBOutlet var bookImg: UIImageView!
     @IBOutlet var bookStory: UILabel!
     
-//    func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        <#code#>
-//    }
     override func viewDidLoad() {
         super.viewDidLoad()
     
