@@ -16,18 +16,14 @@ class StoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         if let book = book {
             navigationItem.title = "\(book.name)"
             bookImg.image = UIImage(named:"\(book.imgName)")
             bookStory.text = book.story
         }
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

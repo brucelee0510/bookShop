@@ -25,11 +25,28 @@ class ListTableViewController: UITableViewController{
 
 
     struct PropertyKeys{
-        static let storySegue = "bookStory"
+        static let storySegue1 = "editStory1"
+        static let storySegue2 = "editStory2"
     }
-    @IBAction func editClicked(_ sender: Any) {
-        performSegue(withIdentifier: PropertyKeys.storySegue, sender: sender)
+    @IBAction func edit1Clicked(_ sender: Any) {
+        performSegue(withIdentifier: PropertyKeys.storySegue1, sender: sender)
     }
+    @IBAction func edit2Clicked(_ sender: Any) {
+        performSegue(withIdentifier: PropertyKeys.storySegue2, sender: sender)
+    }
+    
+    //edit1 exit的unwind1
+    @IBAction func unwindToList1(segue: UIStoryboardSegue) {
+        let source = segue.source as? Edit1TableViewController
+        if let book = source?.book, let row = source?.tag{
+            books[row] = book
+            BookNameLabels[row].text = book.name
+            BookAuthorLabels[row].text = book.author
+        }
+    }
+    
+    //edit2 exit的unwind2
+    @IBAction func unwindToList2(segue: UIStoryboardSegue) {}
     
     //notification觸發時執行此func
     @objc func updateBookNoti(noti: Notification){
@@ -40,18 +57,10 @@ class ListTableViewController: UITableViewController{
             books[row] = book
             BookNameLabels[row].text = bookName
             BookAuthorLabels[row].text = bookAuthor
-            
         }
     }
     
-//    @IBAction func unwindToList(segue: UIStoryboardSegue) {
-//        let source = segue.source as? EditTableViewController
-//        if let book = source?.book, let row = source?.tag{
-//            books[row] = book
-//            BookNameLabels[row].text = book.name
-//            BookAuthorLabels[row].text = book.author
-//        }
-//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         books.append(Book(name:"人人都能學會製作厲害圖表", author:"Smart智富", imgName:"book1", story:"""
@@ -70,9 +79,6 @@ class ListTableViewController: UITableViewController{
             BookAuthorLabels[i].text = books[i].author
             BookCoverImages[i].image = UIImage(named: books[i].imgName)
         }
-
-        //建立observer
-//        let notificationName = Notification.Name("bookEdited")
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateBookNoti(noti:)), name: .bookEdited, object: nil)
     }
@@ -83,9 +89,16 @@ class ListTableViewController: UITableViewController{
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == PropertyKeys.storySegue {
+        if segue.identifier == PropertyKeys.storySegue1{
             if let button = sender as? UIButton{
-                let editTableViewController = segue.destination as? EditTableViewController
+                let editTableViewController = segue.destination as? Edit1TableViewController
+                editTableViewController?.book = books[button.tag]
+                editTableViewController?.tag = button.tag
+                
+            }
+        }else if segue.identifier == PropertyKeys.storySegue2{
+            if let button = sender as? UIButton{
+                let editTableViewController = segue.destination as? Edit2TableViewController
                 editTableViewController?.book = books[button.tag]
                 editTableViewController?.tag = button.tag
                 
